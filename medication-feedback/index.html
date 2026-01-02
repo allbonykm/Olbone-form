@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>복약 경과 기록 | 올본한의원</title>
+    <meta name="description" content="올본한의원 복약 2-3일차 경과 기록 설문">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <span class="logo-icon">🏥</span>
+                <span class="logo-text">올본한의원</span>
+            </div>
+            <h1 class="greeting" id="greeting">안녕하세요!</h1>
+            <p class="subtitle">복약 2-3일차 경과를 기록해주세요</p>
+        </header>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-steps">
+                <span class="step-indicator active" data-step="1">1</span>
+                <span class="step-indicator" data-step="2">2</span>
+                <span class="step-indicator" data-step="3">3</span>
+                <span class="step-indicator" data-step="4">4</span>
+                <span class="step-indicator" data-step="5">5</span>
+            </div>
+        </div>
+
+        <!-- Survey Form -->
+        <form id="surveyForm">
+            <!-- Step 1: 복약 준수 -->
+            <div class="step active" id="step1">
+                <div class="step-icon">🍵</div>
+                <h2 class="step-title">한약을 잘 챙겨 드시고 계신가요?</h2>
+                <div class="option-grid">
+                    <label class="option-card">
+                        <input type="radio" name="compliance" value="2회 복용" required>
+                        <div class="card-content">
+                            <span class="card-icon">✅</span>
+                            <span class="card-text">2회 복용</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="compliance" value="1회 복용">
+                        <div class="card-content">
+                            <span class="card-icon">☑️</span>
+                            <span class="card-text">1회 복용</span>
+                        </div>
+                    </label>
+                    <label class="option-card">
+                        <input type="radio" name="compliance" value="놓침">
+                        <div class="card-content">
+                            <span class="card-icon">❌</span>
+                            <span class="card-text">놓침</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Step 2: 복용 방식 -->
+            <div class="step" id="step2">
+                <div class="step-icon">⏰</div>
+                <h2 class="step-title">복용 방식을 알려주세요</h2>
+
+                <div class="sub-section">
+                    <h3 class="sub-title">복용 시기</h3>
+                    <div class="option-grid small">
+                        <label class="option-card small">
+                            <input type="radio" name="timing" value="식전 30분" required>
+                            <div class="card-content">
+                                <span class="card-text">식전 30분</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="timing" value="식후 즉시">
+                            <div class="card-content">
+                                <span class="card-text">식후 즉시</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="timing" value="식후 1~2시간">
+                            <div class="card-content">
+                                <span class="card-text">식후 1~2시간</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="timing" value="불규칙">
+                            <div class="card-content">
+                                <span class="card-text">불규칙</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sub-section">
+                    <h3 class="sub-title">복용 온도</h3>
+                    <div class="option-grid small">
+                        <label class="option-card small">
+                            <input type="radio" name="temperature" value="따뜻하게" required>
+                            <div class="card-content">
+                                <span class="card-icon">🔥</span>
+                                <span class="card-text">따뜻하게</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="temperature" value="상온">
+                            <div class="card-content">
+                                <span class="card-icon">🌡️</span>
+                                <span class="card-text">상온</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="temperature" value="시원하게">
+                            <div class="card-content">
+                                <span class="card-icon">❄️</span>
+                                <span class="card-text">시원하게</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="sub-section">
+                    <h3 class="sub-title">복약 경험</h3>
+                    <div class="option-grid small">
+                        <label class="option-card small">
+                            <input type="radio" name="experience" value="편해요" required>
+                            <div class="card-content">
+                                <span class="card-icon">😊</span>
+                                <span class="card-text">편해요</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="experience" value="써요">
+                            <div class="card-content">
+                                <span class="card-icon">😬</span>
+                                <span class="card-text">써요</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="experience" value="향이 강해요">
+                            <div class="card-content">
+                                <span class="card-icon">👃</span>
+                                <span class="card-text">향이 강해요</span>
+                            </div>
+                        </label>
+                        <label class="option-card small">
+                            <input type="radio" name="experience" value="목넘김이 어려워요">
+                            <div class="card-content">
+                                <span class="card-icon">😣</span>
+                                <span class="card-text">목넘김이 어려워요</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: 긍정적 변화 -->
+            <div class="step" id="step3">
+                <div class="step-icon">✨</div>
+                <h2 class="step-title">기분 좋은 변화가 있나요?</h2>
+                <p class="step-hint">여러 개 선택 가능해요</p>
+                <div class="option-grid">
+                    <label class="option-card checkbox">
+                        <input type="checkbox" name="positive" value="잠이 잘 옴">
+                        <div class="card-content">
+                            <span class="card-icon">😴</span>
+                            <span class="card-text">잠이 잘 옴</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox">
+                        <input type="checkbox" name="positive" value="소화가 편함">
+                        <div class="card-content">
+                            <span class="card-icon">🍽️</span>
+                            <span class="card-text">소화가 편함</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox">
+                        <input type="checkbox" name="positive" value="피로 감소">
+                        <div class="card-content">
+                            <span class="card-icon">💪</span>
+                            <span class="card-text">피로 감소</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox">
+                        <input type="checkbox" name="positive" value="대변 시원">
+                        <div class="card-content">
+                            <span class="card-icon">�</span>
+                            <span class="card-text">대변 시원</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox">
+                        <input type="checkbox" name="positive" value="아직 모름">
+                        <div class="card-content">
+                            <span class="card-icon">🤔</span>
+                            <span class="card-text">아직 모름</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox">
+                        <input type="checkbox" name="positive" value="기타" id="positiveOther">
+                        <div class="card-content">
+                            <span class="card-icon">✏️</span>
+                            <span class="card-text">기타</span>
+                        </div>
+                    </label>
+                </div>
+                <!-- 기타 입력 필드 -->
+                <div class="other-input-container" id="positiveOtherInput" style="display: none;">
+                    <input type="text" id="positiveOtherText" placeholder="어떤 변화가 있으셨나요?" class="other-input">
+                </div>
+            </div>
+
+            <!-- Step 4: 불편 반응 -->
+            <div class="step" id="step4">
+                <div class="step-icon">🩺</div>
+                <h2 class="step-title">불편한 반응이 있나요?</h2>
+                <div class="option-grid">
+                    <label class="option-card checkbox warning">
+                        <input type="checkbox" name="adverse" value="속쓰림">
+                        <div class="card-content">
+                            <span class="card-icon">🤢</span>
+                            <span class="card-text">속쓰림</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox warning">
+                        <input type="checkbox" name="adverse" value="어지러움">
+                        <div class="card-content">
+                            <span class="card-icon">😵</span>
+                            <span class="card-text">어지러움</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox warning">
+                        <input type="checkbox" name="adverse" value="두근거림">
+                        <div class="card-content">
+                            <span class="card-icon">💓</span>
+                            <span class="card-text">두근거림</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox warning">
+                        <input type="checkbox" name="adverse" value="가려움">
+                        <div class="card-content">
+                            <span class="card-icon">🤚</span>
+                            <span class="card-text">가려움</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox warning">
+                        <input type="checkbox" name="adverse" value="설사">
+                        <div class="card-content">
+                            <span class="card-icon">💧</span>
+                            <span class="card-text">설사</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox warning">
+                        <input type="checkbox" name="adverse" value="기타" id="adverseOther">
+                        <div class="card-content">
+                            <span class="card-icon">✏️</span>
+                            <span class="card-text">기타</span>
+                        </div>
+                    </label>
+                    <label class="option-card checkbox safe" id="noAdverseCard">
+                        <input type="checkbox" name="adverse" value="없음" id="noAdverse">
+                        <div class="card-content">
+                            <span class="card-icon">👍</span>
+                            <span class="card-text">없음</span>
+                        </div>
+                    </label>
+                </div>
+
+                <!-- 기타 입력 필드 -->
+                <div class="other-input-container" id="adverseOtherInput" style="display: none;">
+                    <input type="text" id="adverseOtherText" placeholder="어떤 증상이 있으셨나요?" class="other-input">
+                </div>
+
+                <!-- 안심 안내 -->
+                <div class="alert-box" id="alertBox">
+                    <div class="alert-icon">💬</div>
+                    <div class="alert-content">
+                        <strong>안심하세요!</strong>
+                        <p>초기 적응 반응일 수 있습니다.<br>원장님이 확인 후 연락드리겠습니다.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 5: 추가 기록 -->
+            <div class="step" id="step5">
+                <div class="step-icon">📝</div>
+                <h2 class="step-title">추가로 기록해주세요</h2>
+
+                <div class="sub-section">
+                    <h3 class="sub-title">📷 사진 첨부 (선택)</h3>
+                    <p class="sub-hint">피부 증상 등이 있으면 사진을 올려주세요</p>
+                    <div class="upload-area" id="uploadArea">
+                        <input type="file" id="photoInput" accept="image/*" multiple hidden>
+                        <div class="upload-placeholder" id="uploadPlaceholder">
+                            <span class="upload-icon">📸</span>
+                            <span>터치하여 사진 추가</span>
+                        </div>
+                        <div class="preview-container" id="previewContainer"></div>
+                    </div>
+                </div>
+
+                <div class="sub-section">
+                    <h3 class="sub-title">💬 건의사항</h3>
+                    <textarea id="feedback" name="feedback" placeholder="원장님께 전할 말씀이 있으시면 자유롭게 적어주세요"
+                        rows="4"></textarea>
+                </div>
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="nav-buttons">
+                <button type="button" class="btn btn-prev" id="prevBtn" disabled>
+                    ← 이전
+                </button>
+                <button type="button" class="btn btn-next" id="nextBtn">
+                    다음 →
+                </button>
+                <button type="submit" class="btn btn-submit" id="submitBtn" style="display: none;">
+                    제출하기 ✓
+                </button>
+            </div>
+        </form>
+
+        <!-- Success Screen -->
+        <div class="success-screen" id="successScreen">
+            <div class="success-icon">🎉</div>
+            <h2>감사합니다!</h2>
+            <p>소중한 피드백이 전달되었습니다.</p>
+            <p class="success-note">원장님이 확인 후 필요시 연락드리겠습니다.</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
