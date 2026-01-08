@@ -88,42 +88,45 @@
             color: #aaa;
         }
     </style>
-    <!-- Google Apps Script 연동을 위한 스크립트 -->
+    <!-- Google Apps Script 연동 -->
     <script>
-        // URL 파라미터 파싱
-        function getUrlParams() {
+        // URL 파라미터에서 전화번호 추출
+        function getPhoneFromUrl() {
             const params = new URLSearchParams(window.location.search);
-            return {
-                token: params.get('token') || '',
-                phone: params.get('phone') || '',
-                id: params.get('id') || ''
-            };
+            return params.get('phone') || params.get('p') || '';
         }
 
         // 페이지 로드 시 수신거부 로그 전송
         window.onload = function () {
-            const params = getUrlParams();
+            const phone = getPhoneFromUrl();
 
-            // Google Apps Script Web App URL (나중에 설정)
-            const SCRIPT_URL = ''; // 여기에 Google Apps Script URL 입력
+            // Google Apps Script Web App URL (수신거부 로그용)
+            // TODO: Google Apps Script 배포 후 아래 URL 교체
+            const SCRIPT_URL = 'https://script.google.com/macros/s/여기에_스크립트_ID_입력/exec';
 
-            if (SCRIPT_URL && (params.token || params.phone || params.id)) {
-                // 수신거부 로그 전송
-                fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        action: 'unsubscribe',
-                        token: params.token,
-                        phone: params.phone,
-                        patientId: params.id,
-                        timestamp: new Date().toISOString(),
-                        type: 'long15'
-                    })
-                }).catch(err => console.log('로그 전송 실패:', err));
+            if (phone) {
+                // 전화번호가 있으면 로그 전송
+                const logData = {
+                    action: 'unsubscribe',
+                    phone: phone,
+                    timestamp: new Date().toLocaleString('ko-KR', { timeZone: 'Asia/Seoul' }),
+                    type: 'long15'
+                };
+
+                // Google Sheets에 로그 전송 (no-cors로 전송)
+                fetch(SCRIPT_URL + '?' + new URLSearchParams(logData).toString(), {
+                    method: 'GET',
+                    mode: 'no-cors'
+                }).then(() => {
+                    console.log('수신거부 로그 전송 완료');
+                }).catch(err => {
+                    console.log('로그 전송 실패:', err);
+                });
+
+                // 전화번호 마스킹 표시 (선택)
+                const masked = phone.replace(/(\d{3})(\d{4})(\d{4})/, '$1-****-$3');
+                document.getElementById('phone-display').textContent = masked;
+                document.getElementById('phone-info').style.display = 'block';
             }
         };
     </script>
@@ -137,6 +140,11 @@
         <div class="message">
             앞으로 장기미내원 안내 알림톡을<br>
             받지 않으시게 됩니다.
+        </div>
+
+        <div id="phone-info"
+            style="display: none; background: #e8f5e9; padding: 10px; border-radius: 8px; margin-bottom: 15px; font-size: 13px; color: #2e7d32;">
+            📱 <span id="phone-display"></span>
         </div>
 
         <div class="clinic-name">올본한의원</div>
