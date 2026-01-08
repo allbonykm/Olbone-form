@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>수신거부 완료 - 올본한의원</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Malgun Gothic', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .message {
+            color: #666;
+            font-size: 15px;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .clinic-name {
+            color: #667eea;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+
+        .contact {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .contact-text {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 8px;
+        }
+
+        .phone {
+            font-size: 18px;
+            color: #333;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .phone:hover {
+            color: #667eea;
+        }
+
+        .footer {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #aaa;
+        }
+    </style>
+    <!-- Google Apps Script 연동을 위한 스크립트 -->
+    <script>
+        // URL 파라미터 파싱
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                token: params.get('token') || '',
+                phone: params.get('phone') || '',
+                id: params.get('id') || ''
+            };
+        }
+
+        // 페이지 로드 시 수신거부 로그 전송
+        window.onload = function () {
+            const params = getUrlParams();
+
+            // Google Apps Script Web App URL (나중에 설정)
+            const SCRIPT_URL = ''; // 여기에 Google Apps Script URL 입력
+
+            if (SCRIPT_URL && (params.token || params.phone || params.id)) {
+                // 수신거부 로그 전송
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        action: 'unsubscribe',
+                        token: params.token,
+                        phone: params.phone,
+                        patientId: params.id,
+                        timestamp: new Date().toISOString(),
+                        type: 'long15'
+                    })
+                }).catch(err => console.log('로그 전송 실패:', err));
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="icon">✅</div>
+        <h1>수신거부가 완료되었습니다</h1>
+
+        <div class="message">
+            앞으로 장기미내원 안내 알림톡을<br>
+            받지 않으시게 됩니다.
+        </div>
+
+        <div class="clinic-name">올본한의원</div>
+
+        <div class="contact">
+            <div class="contact-text">진료 관련 문의</div>
+            <a href="tel:031-304-9000" class="phone">📞 031-304-9000</a>
+        </div>
+
+        <div class="footer">
+            건강한 하루 되세요 🙏
+        </div>
+    </div>
+</body>
+
+</html>
